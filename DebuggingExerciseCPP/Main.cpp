@@ -1,5 +1,6 @@
 #include "Player.h"
 #include <iostream>
+#include "Enemy.h"
 
 /// <summary>
 /// Prints a menu with the given options to the screen.
@@ -51,6 +52,14 @@ void printCharacterStats(Character* character)
 	std::cout << "Defense: " << character->getDefense() << std::endl;
 }
 
+void printCharacterStats(Player* character)
+{
+	std::cout << "Name: " << character->getName() << std::endl;
+	std::cout << "Health: " << character->getHealth() << std::endl;
+	std::cout << "Attack Power: " << character->getDamage() << std::endl;
+	std::cout << "Defense: " << character->getDefense() << std::endl;
+}
+
 /// <summary>
 /// Begins a battle between the player and the given character. 
 /// Gets player input for decisions and loops until either the player or the character is dead.
@@ -66,7 +75,7 @@ void printCharacterStats(Character* character)
 int startPlayerBattle(Player* player, Character* enemy)
 {
 	//Loop while both the enemy and player are alive.
-	while (player->getHealth > 0 && enemy->getHealth > 0)
+	while (player->getHealth() > 0 && enemy->getHealth() > 0)
 	{
 		system("cls");
 
@@ -86,7 +95,7 @@ int startPlayerBattle(Player* player, Character* enemy)
 			return 2;
 
 		//Enemy attack.
-		std::cout << enemy->getName << " did: " << enemy->attack(player) << " damage!" << std::endl;
+		std::cout << enemy->getName() << " did: " << enemy->attack(player) << " damage!" << std::endl;
 		system("pause");
 	}
 
@@ -100,15 +109,16 @@ int main()
 	std::cout << "> ";
 	char* playerName = new char();
 	std::cin >> playerName;
+
 	//Initialize new player.
 	Player* player = new Player(playerName, 100, 10, 5);
 
 	//Gets player weapon choice and equips the choosen weapon.
 	int choice = printOptions("Pick an Item: ", "Sword", "Shield");
-	if (choice = 1)
-		player.equipWeapon(Item(10));
+	if (choice == 1)
+		player->equipWeapon(Item(10));
 	else if (choice == 2)
-		player.equipShield(Item(10));
+		player->equipShield(Item(10));
 
 	//Initialize new enemy.
 	Enemy* enemy = new Enemy("Monster", 50, 10, 5);

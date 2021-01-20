@@ -17,7 +17,7 @@ public:
 	virtual float takeDamage(float damage);
 
 	/// <summary>
-	/// Callse the takeDamage function for the character passed in.
+	/// Calls the takeDamage function for the character passed in.
 	/// </summary>
 	/// <param name="other">The characterto deal damage to.</param>
 	/// <returns>The total damage dealt.</returns>
